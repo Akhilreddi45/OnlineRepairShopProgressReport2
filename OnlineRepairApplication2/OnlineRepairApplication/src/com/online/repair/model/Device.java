@@ -3,6 +3,10 @@ package com.online.repair.model;
 import java.util.Date;
 
 import com.online.repair.builder.DeviceBuilder;
+import com.online.repair.state.CompleteRepairState;
+import com.online.repair.state.RepairInProgressState;
+import com.online.repair.state.RepairState;
+import com.online.repair.state.StartRepairState;
 
 public abstract class Device {
 
@@ -14,6 +18,11 @@ public abstract class Device {
 	protected Date estimatedDeliveryDate;
 
 	protected DeviceBuilder builder;
+	
+	RepairState state;
+	RepairState startRepairState;
+	RepairState repairInProgressState;
+	RepairState completeRepairState;
 
 	public Device(DeviceBuilder builder) {
 		this.device = builder.getDevice();
@@ -22,6 +31,10 @@ public abstract class Device {
 		this.contactDetails = builder.getContactDetails();
 		this.transactionDate = builder.getTransactionDate();
 		this.estimatedDeliveryDate = builder.getEstimatedDeliveryDate();
+		this.startRepairState = new StartRepairState(this);
+		this.repairInProgressState = new RepairInProgressState(this);
+		this.completeRepairState = new CompleteRepairState(this);
+		this.state = startRepairState;
 	}
 
 	public String getDevice() {
@@ -70,6 +83,46 @@ public abstract class Device {
 
 	public void setEstimatedDeliveryDate(Date estimatedDeliveryDate) {
 		this.estimatedDeliveryDate = estimatedDeliveryDate;
+	}
+	public RepairState getState() {
+		return state;
+	}
+
+	public void setState(RepairState state) {
+		this.state = state;
+	}
+
+	public RepairState getStartRepairState() {
+		return startRepairState;
+	}
+
+	public void setStartRepairState(RepairState startRepairState) {
+		this.startRepairState = startRepairState;
+	}
+
+	public RepairState getRepairInProgressState() {
+		return repairInProgressState;
+	}
+
+	public void setRepairInProgressState(RepairState repairInProgressState) {
+		this.repairInProgressState = repairInProgressState;
+	}
+
+	public RepairState getCompleteRepairState() {
+		return completeRepairState;
+	}
+
+	public void setCompleteRepairState(RepairState completeRepairState) {
+		this.completeRepairState = completeRepairState;
+	}
+
+	public void startRepair() {
+		state.startRepair();
+	}
+
+	public void completeRepair() {
+		state.repairInProgress();
+		state.completeRepair();
 	}
 
 	@Override

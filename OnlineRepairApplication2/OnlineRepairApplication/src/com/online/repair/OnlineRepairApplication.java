@@ -15,6 +15,12 @@ public class OnlineRepairApplication {
 		List<Device> devices = getDevicesForRepair();
 
 		for (Device device : devices) {
+			System.out.println("Before Repair started ..... ");
+			System.out.println(device);
+			System.out.println("Start Repair ");
+			device.startRepair();
+			System.out.println("Moving device state ");
+			device.completeRepair();
 			System.out.println(device);
 		}
 
