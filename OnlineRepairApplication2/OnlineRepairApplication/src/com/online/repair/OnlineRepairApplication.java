@@ -5,26 +5,38 @@ import java.util.Date;
 import java.util.List;
 
 import com.online.repair.builder.DeviceBuilder;
+import com.online.repair.command.CompleteRepairCommand;
+import com.online.repair.command.RepairInProgressCommand;
+import com.online.repair.command.StartRepairCommand;
 import com.online.repair.model.Device;
-import com.online.repair.service.DeviceRepairFactory;
+import com.online.repair.factory.DeviceRepairFactory;
 
 public class OnlineRepairApplication {
 
 	public static void main(String[] args) {
 
 		List<Device> devices = getDevicesForRepair();
-
+		StartRepairCommand startRepairCommand = null;
+		RepairInProgressCommand repairInProgressCommand = null;
+		CompleteRepairCommand completeRepairCommand = null;
+		
 		for (Device device : devices) {
 			System.out.println("Before Repair started ..... ");
-			System.out.println(device);
 			System.out.println("Start Repair ");
-			device.startRepair();
-			System.out.println("Moving device state ");
-			device.completeRepair();
 			System.out.println(device);
+			startRepairCommand = new StartRepairCommand(device);
+			startRepairCommand.execute();
+			System.out.println("Moving inprogress state ");
+			System.out.println(device);
+			repairInProgressCommand = new RepairInProgressCommand(device);
+			repairInProgressCommand.execute();
+			System.out.println("Moving to Complete State");
+			System.out.println(device);
+			completeRepairCommand = new CompleteRepairCommand(device);
+			completeRepairCommand.execute();
 		}
 
-	}
+			}
 
 	private static List<Device> getDevicesForRepair() {
 

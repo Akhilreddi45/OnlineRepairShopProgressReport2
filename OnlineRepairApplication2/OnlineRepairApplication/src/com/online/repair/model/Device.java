@@ -119,9 +119,10 @@ public abstract class Device {
 	public void startRepair() {
 		state.startRepair();
 	}
-
-	public void completeRepair() {
+	public void repairInProgress() {
 		state.repairInProgress();
+	}
+	public void completeRepair() {	
 		state.completeRepair();
 	}
 
@@ -140,6 +141,8 @@ public abstract class Device {
 		builder.append(transactionDate);
 		builder.append(", estimatedDeliveryDate=");
 		builder.append(estimatedDeliveryDate);
+		builder.append(", state=");
+		builder.append(state.toString());
 		builder.append("]");
 		return builder.toString();
 	}

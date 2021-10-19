@@ -1,4 +1,4 @@
-package com.online.repair.service;
+package com.online.repair.factory;
 
 import com.online.repair.builder.DeviceBuilder;
 import com.online.repair.model.Device;

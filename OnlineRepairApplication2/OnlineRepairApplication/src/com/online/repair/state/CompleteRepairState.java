@@ -28,5 +28,11 @@ public class CompleteRepairState implements RepairState {
 		System.out.println("Device repair is Completed");
 		device.setState(null);
 	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CompleteRepairState");
+		return builder.toString();
+	}
 
 }
