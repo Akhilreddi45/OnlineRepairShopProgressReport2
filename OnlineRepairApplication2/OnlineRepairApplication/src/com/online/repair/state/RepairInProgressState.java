@@ -34,4 +34,10 @@ public class RepairInProgressState implements RepairState {
 		return builder.toString();
 	}
 
+	@Override
+	public void paymentDone() {
+		System.out.println("Device repair is in progress, cannot done payment");
+		
+	}
+
 }

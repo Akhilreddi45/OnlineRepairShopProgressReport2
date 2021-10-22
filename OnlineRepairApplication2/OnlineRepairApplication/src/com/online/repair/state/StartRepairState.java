@@ -32,6 +32,10 @@ public class StartRepairState implements RepairState {
 		builder.append("StartRepairState");
 		return builder.toString();
 	}
-	
+	@Override
+	public void paymentDone() {
+		System.out.println("Device repair is not started yet");
+		
+	}
 
 }
