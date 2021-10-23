@@ -20,13 +20,14 @@ public class RepairInProgressState implements RepairState {
 	@Override
 	public void repairInProgress() {
 		System.out.println("Device repair is in progress State");
-		device.setState(device.getCompleteRepairState());
+		device.setState(device.getPaymentDoneState());
 	}
 
 	@Override
 	public void completeRepair() {
 		System.out.println("Device repair is in progress, cannot complete");
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
